@@ -14,7 +14,7 @@ lm(cbind(    y2, y3) ~ x1 + x2 + x3 + y1 + ...)
 lm(cbind(        y3) ~ x1 + x2 + x3 + y1, y2 + ...)
 ```
 
-RB tests are all univariate, so the following would be the RB version of the above idea:
+RB components are all univariate, so the following would be the RB version of the above idea:
 
 ```
 lm(cbind(y1, y2, y3) ~ x1 + x2 + x3 + ...) # The 'overall' MANOVA
@@ -43,9 +43,11 @@ Y3 | Y1,Y2                ○       ●    ●         ●      ●
 
 
 - Circle area ~ effect size
+  + Need a common scale for multivariate and univariate
 - Circles shaded if term is significant
 - Shading coloured according to direction of effect
   + Circle outline dashed for negative direction (to aid b/w printing, colorblindness)
+  + Unsure what to do with items where direction is undefined
 
 
 - Maybe should use squares instead of circles to make differences in area more perceptible
