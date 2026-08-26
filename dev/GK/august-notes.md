@@ -48,4 +48,4 @@ Y3 | Y1,Y2                ○       ●    ●         ●      ●
   + Circle outline dashed for negative direction (to aid b/w printing, colorblindness)
 
 
-- Maybe should use square dots instead of circles to make differences in area more perceptible
+- Maybe should use squares instead of circles to make differences in area more perceptible
