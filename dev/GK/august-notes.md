@@ -51,3 +51,15 @@ Y3 | Y1,Y2                ○       ●    ●         ●      ●
 
 
 - Maybe should use squares instead of circles to make differences in area more perceptible
+
+
+## Prediction
+
+**From** [`GK-Project.md`](./GK-Project.md):
+
+> [MF:] Open question: how to *visualize* prediction/confidence
+  regions for a new observation in the multivariate case (ellipses again?).
+
+- Visualize as ellipses in a pairwise matrix of response variables
+- Create option to use biplot instead
+  + Further options to either use CD or PC scores
