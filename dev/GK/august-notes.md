@@ -62,4 +62,4 @@ Y3 | Y1,Y2                ○       ●    ●         ●      ●
 
 - Visualize as ellipses in a pairwise matrix of response variables
 - Create option to use biplot instead
-  + Further options to either use CD or PC scores
+  + Further options to either use canonical or PC scores
