@@ -61,5 +61,6 @@ Y3 | Y1,Y2                ○       ●    ●         ●      ●
   regions for a new observation in the multivariate case (ellipses again?).
 
 - Visualize as ellipses in a pairwise matrix of response variables
+  + Project full ellipsoid onto each $Y_i, Y_j$ plane
 - Create option to use biplot instead
   + Further options to either use canonical or PC scores
