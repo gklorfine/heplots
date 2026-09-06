@@ -2,8 +2,12 @@
 
 **Result of a GPT conversation on 09/03/2026**
 
+  **GK: Also includes my written notes in this format**
+
 ## From Omnibus Tests to Understanding: Improving the Interpretation of
 ## Multivariate Linear Models
+
+  **GK: Don't like this title but something along the lines of improving interpretation + accessibility might work.**
 
 The central problem is not that researchers lack ways to fit multivariate
 linear models (MLMs). It is that conventional output often stops at an
@@ -19,6 +23,8 @@ The proposal could ask three connected questions:
    multivariate designs. Examine which analyses and visualizations are
    reported, what follow-up procedures are used, and where potentially
    important interpretations are missed.
+
+   **GK: I feel like this is the step that's missing substance. RB should be a fleshed out example of this, e.g., one fork in the road, but I am having trouble thinking of what the other examples might be. I think  more substance here might make the following steps (2 & 3) fold neatly into this and give the overall idea.**
 
 2. **When can ordered-response analysis provide additional insight?**
 
@@ -77,6 +83,8 @@ A manageable sequence would be:
 Use a reproducible scoping review in one or two substantive fields where
 multivariate outcomes are common. Code such features as:
 
+  **GK: Focus only on psychology? Or across the behavioural sciences (perhaps too broad)?**
+
 * reasons given for using MANOVA or an MLM;
 * number and nature of response variables;
 * whether response variables have a natural or explicitly stated priority;
@@ -86,8 +94,16 @@ multivariate outcomes are common. Code such features as:
 * use and type of data visualization; and
 * availability of data or sufficient summary information for reanalysis.
 
+    **GK: Need to figure out how to code/operationalize "opportunity missed"**
+
 Restricting the disciplinary scope, publication period, or journal sample
 will be essential for feasibility.
+
+  **GK: **
+    - **See above "GK:" comment for disciplinary scope. Journal choice will follow this (will narrow by subdiscipline, choose most reputable journals for each; try to keep a balance of publishers to control for things like submission guidelines).**
+    - **Publication period: prioritize recency; log the date at which article collection starts. Articles will then be taken from the volume and issue most recent to this date, in reverse order of appearance. Moreover, the first article I record would be the last article in the most recent volume and issue. Once articles are exhausted, I would then move to the next-most recent journal volume and/or issue. I would then take the second to last article, third to last, etc., stopping when $n$ articles are collected for that given category.**
+    - **Number of articles: 250-500**
+    - **Further inclusion criteria: contains one or more studies with a reported multivariate outcome.**
 
 ### Objective 2: Develop and Evaluate Visual Stepdown Analysis
 
@@ -115,12 +131,24 @@ Reanalyse a small, purposively selected set of published examples for which:
 * the original analysis leaves an identifiable interpretive question
   unresolved.
 
-The Shiny app belongs here---as dissemination and interaction---not as the
-central research contribution. Unless the project includes formal usability
-studies, building an app should not by itself be claimed to establish
-accessibility. More defensible claims are that the app will:
+  **GK: Is it necessary to specify a course of action for if no articles fit these criteria? I am thinking that all three are likely, but perhaps not all at once. An idea: make up plausible data if no adequate data is available, as RB would allow for an interpretive question to be resolved if response ordering has substantive justification (which I'd think would be practically certain to find at least one case in N > 250 multivariate articles).**
+
+
+The Shiny app would be an important accessibility and dissemination
+component. It would lower the technical barrier to using these methods by
+allowing researchers to upload their data, select an analysis or display
+through a guided interface, and interpret output without needing to
+write R code. Embedded explanations could also help users understand what to
+look for and how each display relates to the statistical results. Thus, the
+app can reasonably be described as making the methods more accessible by
+design. A stronger claim that the interface has been shown to improve
+usability or interpretation would require formal user evaluation.
+
+In particular, the app could:
 
 * expose the conditional models behind each display;
+* guide users through data upload and analysis selection;
 * allow users to compare plausible response orders;
 * connect effect-table cells to conditional plots; and
-* illustrate how the decomposition relates to the omnibus result.
+* illustrate how the decomposition relates to the omnibus result, with
+  guidance on interpreting the visual output.
