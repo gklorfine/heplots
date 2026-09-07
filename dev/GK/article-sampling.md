@@ -53,9 +53,10 @@ set before screening begins.
 
 ## Working Eligibility Rules
 
-The final rules will be settled during the pilot. The intended main-survey
-population is empirical articles that jointly analyze at least two continuous
-response variables using MANOVA, MANCOVA, or a multivariate linear model.
+The final rules will be settled after a brief pretest of the coding form and
+before the main sample is screened. The intended main-survey population is
+empirical articles that jointly analyze at least two continuous response
+variables using MANOVA, MANCOVA, or a multivariate linear model.
 
 The following will normally be excluded:
 
@@ -190,11 +191,17 @@ replacement and reason recorded.
 
 ## Coding Reliability
 
-The eligibility form and main coding form will be tested during the pilot.
-At least a subset of articles will be screened and coded independently by a
-second reviewer. Disagreements will be discussed, and unclear rules will be
-revised before the full study proceeds. Changes made after the pilot will be
-dated and documented.
+Before full screening begins, the eligibility form and main coding form will
+be pretested on approximately 20--30 articles outside the analytic sample.
+The pretest will be used to identify ambiguous definitions, clarify the
+instructions, and estimate the time required for screening and coding. The
+coding protocol will then be finalized before it is applied to the randomized
+sample.
+
+A subset of the main sample will be screened and coded independently by a
+second reviewer. Disagreements will be discussed and resolved using the
+written coding rules. Any later changes to those rules will be dated and
+documented.
 
 Particular attention will be given to distinctions that are easy to apply
 inconsistently, including:
@@ -205,25 +212,27 @@ inconsistently, including:
   merely disagrees; and
 * unavailable information versus evidence that a method was not used.
 
-## Pilot and Final Sample Sizes
+## Pretest, Feasibility, and Sample Sizes
 
-A pilot will be conducted before committing to the final values of $m_j$ and
-$n_j$. It should include more than one journal and, if relevant, more than one
-subfield. The pilot will estimate:
+The pretest is a check of the coding process, not a separate study. It will
+not be used to decide the research question or to select eligibility rules
+that produce more favourable results. Where possible, its articles will come
+from journals or years outside the main sampling frame. If articles from the
+sampling frame must be used, they will be excluded from the analytic sample
+or screened again after the coding protocol has been finalized.
 
-* the number of articles screened per hour;
-* the proportion of empirical articles containing an eligible analysis;
-* the time needed to code an eligible article;
-* the frequency of unavailable full text;
-* the frequency of ambiguous eligibility decisions; and
-* agreement between reviewers.
+Before sampling, a preliminary bibliographic count will confirm that the
+chosen journals and publication period contain enough potentially eligible
+articles for the proposed work. This count is a feasibility check only;
+eligibility will still be established through the formal screening process.
 
-The final prevalence sample size will be based on the desired precision of
-the prevalence estimate and the available time. The main-survey sample size
-will be based on the number of comparisons planned, the amount of detail in
-the coding form, and the estimated coding workload. A smaller, carefully
-coded sample with reliability checks is preferable to a larger sample that
-cannot be coded consistently.
+The values of $m_j$ and $n_j$ will be specified in the protocol before the
+main screening begins. The prevalence sample sizes will be based on the
+desired precision of the estimates and the available time. The main-survey
+sample sizes will reflect the comparisons planned, the detail required by the
+coding form, and the expected coding workload. The pretest may be used to
+confirm that the schedule is realistic, but the validity of the sampling
+procedure does not depend on its results.
 
 ## Reporting
 
