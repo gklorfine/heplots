@@ -100,10 +100,16 @@ Restricting the disciplinary scope, publication period, or journal sample
 will be essential for feasibility.
 
   **GK: **
-    - **See above "GK:" comment for disciplinary scope. Journal choice will follow this (will narrow by subdiscipline, choose most reputable journals for each; try to keep a balance of publishers to control for things like submission guidelines).**
-    - **Publication period: prioritize recency; log the date at which article collection starts. Articles will then be taken from the volume and issue most recent to this date, in reverse order of appearance. Moreover, the first article I record would be the last article in the most recent volume and issue. Once articles are exhausted, I would then move to the next-most recent journal volume and/or issue. I would then take the second to last article, third to last, etc., stopping when $n$ articles are collected for that given category.**
-    - **Number of articles: 250-500**
-    - **Further inclusion criteria: contains one or more studies with a reported multivariate outcome.**
+  
+  - **See above "GK:" comment for disciplinary scope. Journal choice will follow this (will narrow by subdiscipline, choose most reputable journals for each; try to keep a balance of publishers to control for things like submission guidelines).**
+  - **Publication period: 2020-2025?**
+    
+<!-- OUTDATED/WRONG: See `dev/GK/article-sampling.md`
+
+    prioritize recency; log the date at which article collection starts. Articles will then be taken from the volume and issue most recent to this date, in reverse order of appearance. Moreover, the first article I record would be the last article in the most recent volume and issue. Once articles are exhausted, I would then move to the next-most recent journal volume and/or issue. I would then take the second to last article, third to last, etc., stopping when $n$ articles are collected for that given category.
+-->
+  - **Number of articles: 250-500**
+  - **Further inclusion criteria: contains one or more studies with a reported multivariate outcome.**
 
 ### Objective 2: Develop and Evaluate Visual Stepdown Analysis
 
