@@ -84,6 +84,8 @@ Use a reproducible scoping review in one or two substantive fields where
 multivariate outcomes are common. Code such features as:
 
   **GK: Focus only on psychology? Or across the behavioural sciences (perhaps too broad)?**
+  
+  **GK: Need to be careful here to keep things justifiably-NSERC, or switch to a SSHRC application**
 
 * reasons given for using MANOVA or an MLM;
 * number and nature of response variables;
