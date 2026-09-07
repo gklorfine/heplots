@@ -86,6 +86,8 @@ multivariate outcomes are common. Code such features as:
   **GK: Focus only on psychology? Or across the behavioural sciences (perhaps too broad)?**
   
   **GK: Need to be careful here to keep things justifiably-NSERC, or switch to a SSHRC application**
+  
+  **GK: Am I able to justify psych through something like: "recognizing whether response variables have a substantive order requires disciplinary knowledge. Thus articles were restricted to psychology, where my training lies."**
 
 * reasons given for using MANOVA or an MLM;
 * number and nature of response variables;
