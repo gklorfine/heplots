@@ -151,27 +151,281 @@ citation before writing anything citable (a vignette, paper, or even
 
 ## Implementation sketch for `RoyBargmann()` (for the follow-up)
 
-Not attempting this yet -- just noting the shape of it for next time:
+Not attempting this yet -- just noting the shape of it for next time. Design
+settled on 2026-09-08: `RoyBargmann()` takes the *same* model formula as the
+overall MLM (`cbind(y1, ..., yp) ~ x1 + x2 + ...`), reads the response
+priority order directly off the `cbind()`, and returns an object holding the
+$p$ fitted stepdown `"lm"` models -- an `"lmlist"` -- with `Anova()`,
+`summary()`, `coef()`, and `print()` methods hung off it.
 
-* Required input: the MLM's response variables **in priority order** --
-  this has to come from the user (an argument, or the column order of the
-  `cbind()` in the fitted `"mlm"` object, documented as significant), never
-  inferred from the data. 
-  
-* For step $i$: fit `lm(Y_i ~ <original X terms> + Y_1 + ... + Y_(i-1))` and
-  run `car::Anova()` on it to get the stepdown F-test for the $X$ terms.
-  
-* Also fit/report the overall MLM's Wilks' $\Lambda$ (`car::Anova(mlm_fit)`)
-  for reference, and as a sanity check: $\prod_i \lambda_i$ from the stepdown
-  steps should numerically match the overall $\Lambda$ -- a good unit test.
-  
-* Output: probably an object with `print`/`summary` methods (matching this
-  package's `default`/`lm`/`mlm` S3 convention elsewhere), reporting a table
-  of (variable, df, F, p, stepdown $\lambda$) analogous to SAS/SPSS stepdown
-  output. Check how SAS, `PROC GLM / STEPDOWN` does this and reports it.
-  + In R, this might look like a `"lmlist"` object, with one slot for each of the
-    successive models.
-  
+### Required input
+
+* Response priority order comes **only** from the left-to-right order of
+  `cbind(y1, y2, ...)` in `formula` -- never inferred from the data, per
+  Roy's original requirement of a defensible substantive ordering. Document
+  this loudly in `@param formula`.
+* The same `x` terms (right-hand side of `formula`) are used, unchanged, at
+  every step; what grows at step $i$ is the covariate set
+  $Y_1, \dots, Y_{i-1}$.
+
+### The `"lmlist"` object
+
+`"lmlist"` is meant as a lightweight, general base class for "a named list
+of `lm` fits sharing a common thread" (distinct from `nlme::lmList`, which
+fits *the same* formula across groups -- here each step's formula differs in
+width). `RoyBargmann()` returns an object of class `c("RoyBargmann",
+"lmlist")`: a list of $p$ `"lm"` fits, named by response, i.e.
+`steps[["y2"]]` is the fit of `y2 ~ x1 + x2 + ... + y1`.
+
+`mlm` is stored as an **attribute**, not a list element -- `steps[[i]]` for
+`i in seq_along(steps)` are still exactly the `p` stepdown `"lm"` fits and
+nothing else, so `"lmlist"` stays accurate for the list itself. (`unclass()`
+would show the attribute alongside `names`/`class` the way any object's
+attributes show, which is a bit more than a bare `list` carries, but
+`length()`, `[[`, `lapply()` etc. all still behave as "list of `p` things.")
+
+```r
+# TODO: 🚩 Sketch only -- not implemented yet. Written 2026-09-08.
+
+#' Roy-Bargmann Stepdown Analysis
+#'
+#' @description
+#' Fits the sequence of Roy-Bargmann stepdown models for a multivariate
+#' linear model `lm(cbind(y1, ..., yp) ~ x1 + x2 + ...)`, where the `y`
+#' responses are listed in a substantively meaningful priority order. At
+#' step `i`, `y_i` is regressed on the original `x` terms with
+#' `y_1, ..., y_(i-1)` added as covariates; the joint F-test for the `x`
+#' terms in that model is the stepdown test for whether `y_i` adds unique
+#' discriminating power. See `dev/Roy-Bargmann.md` for the background.
+#'
+#' @param formula A model `formula` of the form
+#'        `cbind(y1, y2, ..., yp) ~ x1 + x2 + ...`. The left-to-right order
+#'        of the responses in `cbind()` **is** the priority order for the
+#'        stepdown sequence -- it is read directly from the formula and is
+#'        never inferred from the data.
+#' @param data A `data.frame` containing the variables named in `formula`.
+#' @param ... Additional arguments passed on to `lm()` for every step and
+#'        for the overall MLM fit (e.g. `subset`, `weights`, `na.action`).
+#'
+#' @return An object of class `c("RoyBargmann", "lmlist")`: a list of `p`
+#'         fitted `"lm"` objects, one per stepdown step, named by the
+#'         response tested at that step, with attributes:
+#'   * `responses`: character vector of response names, in priority order
+#'   * `formula`: the original `formula`
+#'   * `mlm`: the overall `lm(cbind(...) ~ ...)` fit, kept for the overall
+#'     Wilks' $\Lambda$ reference used by `summary()`/`Anova()`
+#'
+#' @export
+RoyBargmann <- function(formula, data, ...) {
+  # 1. Input validation and preprocessing
+  lhs <- formula[[2]]
+  if (!identical(lhs[[1]], as.name("cbind"))) {
+    stop(glue::glue(
+      "The left-hand side of `formula` must be a `cbind(...)` of response ",
+      "variables in priority order, e.g. `cbind(y1, y2, y3) ~ x1 + x2`"
+    ))
+  }
+  responses <- vapply(as.list(lhs)[-1], deparse, character(1))
+  p <- length(responses)
+  if (p < 2) {
+    stop(glue::glue("Need at least 2 response variables for a stepdown analysis, got {p}"))
+  }
+  x_terms <- attr(terms(formula), "term.labels")
+
+  # 2. Overall MLM fit -- kept for the Wilks' Lambda sanity check
+  mlm_fit <- lm(formula, data = data, ...)
+
+  # 3. Fit the p stepdown models. Sequential by construction -- step i's
+  #    formula depends on steps 1..(i-1), so this isn't vectorizable, but
+  #    lapply() keeps it out of an explicit for-loop.
+  steps <- lapply(seq_len(p), function(i) {
+    rhs_terms <- c(x_terms, responses[seq_len(i - 1)])
+    step_formula <- reformulate(rhs_terms, response = responses[i])
+    lm(step_formula, data = data, ...)
+  })
+  names(steps) <- responses
+
+  # 4. Return
+  structure(
+    steps,
+    class = c("RoyBargmann", "lmlist"),
+    responses = responses,
+    x_terms = x_terms,
+    formula = formula,
+    mlm = mlm_fit
+  )
+}
+```
+
+### `Anova()` / `summary()` -- the stepdown table
+
+The substantive per-step test is a *joint* test of all `x` terms together
+(matching the single hypothesis SSCP matrix $\mathbf{H}$ in the $\Lambda$
+decomposition above), not the per-term Type II/III rows `car::Anova()`
+would give for a step's `lm` on its own. So each step needs a model
+comparison: full model (`x` terms + `y` covariates) vs. reduced model
+(`y` covariates only, `x` terms dropped). This generalizes the common
+single-factor MANOVA case (where it reduces to the ordinary ANCOVA F-test
+for the group effect) to designs with multiple `x` terms tested jointly.
+
+```r
+# TODO: 🚩 Sketch only -- not implemented yet.
+
+#' @rdname RoyBargmann
+#' @param object,mod A `"RoyBargmann"` object, as returned by `RoyBargmann()`.
+#' @export
+Anova.RoyBargmann <- function(mod, ...) {
+  responses <- attr(mod, "responses")
+  x_terms   <- attr(mod, "x_terms")
+  data      <- model.frame(attr(mod, "mlm"))
+
+  # For step i, compare the full stepdown model against the same model
+  # with the x terms dropped (y covariates only, or intercept-only at i=1)
+  tests <- lapply(seq_along(mod), function(i) {
+    reduced_terms <- responses[seq_len(i - 1)]
+    reduced_formula <- if (length(reduced_terms)) {
+      reformulate(reduced_terms, response = responses[i])
+    } else {
+      reformulate("1", response = responses[i])
+    }
+    reduced_fit <- lm(reduced_formula, data = data)
+    anova(reduced_fit, mod[[i]])[2, ]
+  })
+
+  df1    <- vapply(tests, function(a) a[["Df"]], numeric(1))
+  df2    <- vapply(seq_along(mod), function(i) df.residual(mod[[i]]), numeric(1))
+  Fstat  <- vapply(tests, function(a) a[["F"]], numeric(1))
+  pval   <- vapply(tests, function(a) a[["Pr(>F)"]], numeric(1))
+  lambda <- 1 / (1 + (df1 / df2) * Fstat)
+
+  tab <- data.frame(
+    response = responses,
+    df1 = df1, df2 = df2, F = Fstat, p.value = pval,
+    lambda = lambda,
+    cum.lambda = cumprod(lambda),
+    row.names = responses
+  )
+  # Sanity check (documented, not enforced): with a single x term, or when
+  # the x terms are tested jointly, tab$cum.lambda[p] should match the
+  # overall Wilks' Lambda from `anova(update(mlm, . ~ 1), mlm, test = "Wilks")`
+  structure(tab, class = c("Anova.RoyBargmann", "data.frame"))
+}
+
+#' @rdname RoyBargmann
+#' @export
+summary.RoyBargmann <- function(object, ...) {
+  structure(
+    list(
+      stepdown = Anova.RoyBargmann(object),
+      steps = lapply(object, summary)
+    ),
+    class = "summary.RoyBargmann"
+  )
+}
+
+#' @rdname RoyBargmann
+#' @export
+print.summary.RoyBargmann <- function(x, ...) {
+  cat("Roy-Bargmann Stepdown Analysis\n\n")
+  print(x$stepdown)
+  invisible(x)
+}
+```
+
+### `coef()` and `print()`
+
+Each step's model has a *different* width (the covariate set grows), so
+unlike `nlme::coef.lmList` (which can return a matrix because every group
+shares one formula), `coef.RoyBargmann` returns a named list -- one
+coefficient vector per step -- rather than forcing a ragged matrix:
+
+```r
+#' @rdname RoyBargmann
+#' @export
+coef.RoyBargmann <- function(object, ...) {
+  lapply(object, coef)
+}
+
+#' @rdname RoyBargmann
+#' @export
+print.RoyBargmann <- function(x, ...) {
+  cat("Roy-Bargmann Stepdown Analysis:", length(x), "steps\n\n")
+  formulas <- lapply(x, formula)
+  for (i in seq_along(x)) {
+    cat(glue::glue("Step {i}: {deparse(formulas[[i]])}"), "\n")
+  }
+  invisible(x)
+}
+```
+
+### Remaining open questions
+
+* ~~Whether `Anova.RoyBargmann()` should dispatch on `car::Anova()`'s S3
+  generic directly~~ -- **resolved**: `car` is already an `Imports` (not
+  `Suggests`) in `DESCRIPTION`, and the package already has precedent for
+  exactly this (`R/etasq.R` defines `etasq.Anova.mlm` with `#' @importFrom
+  car Anova`). So `Anova.RoyBargmann <- function(mod, ...)` with
+  `#' @importFrom car Anova` and `#' @export` is enough for roxygen2 to
+  register `S3method(Anova, RoyBargmann)`, and `Anova(rb_fit)` (or
+  `car::Anova(rb_fit)`) will just dispatch correctly once both packages are
+  loaded.
+
+  Checked what `car::Anova()` actually returns, since that shapes the
+  sketch above: on a single-response `"lm"` (each stepdown model on its
+  own) it returns an eager `c("anova", "data.frame")` -- one row per term,
+  computed immediately, printed via `stats:::print.anova`. On an `"mlm"`
+  (the overall fit) it instead returns a **lazy** `"Anova.mlm"` object that
+  just holds the raw `SSP`/`SSPE`/`df` per term -- the actual Wilks/Pillai/
+  etc. statistic is only computed inside `print.Anova.mlm()` /
+  `summary.Anova.mlm()`. Two implications for us:
+    + Our hand-rolled full-vs-reduced comparison in the sketch above is
+      still necessary in general (car's per-term `Anova.lm()` rows test
+      each `x` term *separately*, not jointly) -- except in the single-
+      `x`-term case, where `car::Anova(step_fit)`'s one row for that term
+      already *is* the joint test, so the reduced-model refit could be
+      skipped there as a fast path.
+    + Car's lazy pattern (store `SSPH`/`SSPE`, defer the F/lambda
+      computation to `print`/`summary`) is a reasonable model to imitate
+      if `Anova.RoyBargmann()` ever needs to support more than one test
+      statistic (Pillai, Hotelling-Lawley, Roy) the way `Anova.mlm` does --
+      not needed for the univariate stepdown F itself, but worth keeping
+      in mind if this grows an `overall = TRUE` mode (next point).
+
+* Whether the overall-$\Lambda$ sanity check belongs *in* `summary()`
+  output or is left as a unit test only -- **resolved**: expose it via an
+  `overall` argument on `Anova.RoyBargmann()` rather than hardcoding it into
+  `summary()`:
+
+  ```r
+  Anova.RoyBargmann <- function(mod, overall = FALSE, ...) {
+    tab <- ...  # as sketched above
+
+    if (overall) {
+      mlm_fit <- attr(mod, "mlm")
+      x_terms <- attr(mod, "x_terms")
+      reduced_mlm <- update(mlm_fit, reformulate(".", response = ".") ) # drop x terms
+      # i.e. refit mlm_fit with x_terms removed from the RHS
+      overall_test <- anova(reduced_mlm, mlm_fit, test = "Wilks")
+      attr(tab, "overall") <- overall_test
+      attr(tab, "lambda.check") <- c(
+        cum.lambda = tab$cum.lambda[nrow(tab)],
+        overall.wilks = overall_test$Wilks[2]
+      )
+    }
+    tab
+  }
+  ```
+
+  `summary.RoyBargmann()` can then just call `Anova.RoyBargmann(object,
+  overall = TRUE)` and print the `lambda.check` pair as a footnote --
+  keeps the expensive extra refit opt-in for `Anova()` callers who don't
+  need it, while `summary()` always shows it.
+
+* `print.summary.RoyBargmann()` above is bare-bones (just the stepdown
+  table) -- decide whether to also show per-step `summary(lm)` output
+  (`$steps`), and how verbose that should be by default vs. behind a
+  `verbose = FALSE` argument.
+
 * Visualization ideas already sketched in `GK-Project.md` (`heplot()`,
   `pvPlot()`-style conditioned scatterplots) -- not duplicating those here.
 
