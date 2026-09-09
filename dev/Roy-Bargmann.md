@@ -356,6 +356,15 @@ attributes show, which is a bit more than a bare `list` carries, but
 #'   * `mlm`: the overall `lm(cbind(...) ~ ...)` fit, kept for the overall
 #'     Wilks' $\Lambda$ reference used by `summary()`/`Anova()`
 #'
+#' @references 
+#' Roy, S. N. (1958). Step-Down Procedure in Multivariate Analysis.
+#' *The Annals of Mathematical Statistics*, 29(4), 1177-1187.
+#' \doi{10.1214/aoms/1177706449}.
+#' 
+#' Roy, S. N., & Bargmann, R. E. (1958). Tests of Multiple Independence
+#' and the Associated Confidence Bounds. *The Annals of Mathematical
+#' Statistics*, 29(2), 491-503. \doi{10.1214/aoms/1177706624}.
+#'
 #' @export
 RoyBargmann <- function(formula, data, ...) {
   # 1. Input validation and preprocessing
