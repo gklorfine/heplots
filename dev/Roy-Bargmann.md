@@ -45,7 +45,9 @@ tests "the _conditional_ univariate distribution of the $i$-th variate given the
 first $i-1$ variates," and "the compound multivariate hypothesis is accepted
 [only] if all the component univariate hypotheses are accepted."
 
-**What it tests**: In the case of a one-way MANOVA design, the $k$th step-down $F$ statistic tests the hypothesis that the means for $\mathbf{Y}_k = $Y_{k1}, Y_{k2}, \dots, Y_{kg}$
+### What it tests
+
+In the case of a one-way MANOVA design, the $k$th step-down $F$ statistic tests the hypothesis that the means for $\mathbf{Y}_k = $Y_{k1}, Y_{k2}, \dots, Y_{kg}$
 do not differ, with all variation due to the variables $\mathbf{Y}_1, $\mathbf{Y}_2, \dots, $\mathbf{Y}_{k-1}$ eliminated.
 Rejection of this hypothesis implies that the $k$th variable is reflecting differences between
 groups that cannot be accounted for by any linear combinations of the previous $k-1$ responses.
@@ -104,42 +106,176 @@ but might still be worth considering for this project.
 
 ## Relation to overall Wilks' $\Lambda$
 
-For the full MLM, Wilks' $\Lambda = |\mathbf{E}| / |\mathbf{E} + \mathbf{H}|$,
-where $\mathbf{E}$ is the error (within-group) SSCP matrix and $\mathbf{H}$ is
-the hypothesis SSCP matrix for the $X$ terms being tested.
-
-A determinant of a $p \times p$ SSCP matrix can be factored, via successive
-conditioning in a chosen variable order, into a product of $p$ terms: the
-first is the (marginal) sum of squares of $Y_1$, and the $i$-th is the
-*residual* sum of squares of $Y_i$ after regressing it on $Y_1, \dots,
-Y_{i-1}$ (this is the same idea as a Cholesky decomposition of the SSCP
-matrix, or building up $R^2$ one predictor at a time). Applying that
-factorization to $\mathbf{E}$ *and* to $\mathbf{E} + \mathbf{H}$, in the same
-variable order, and taking the ratio term-by-term, gives
+This section works the derivation from Roy (1958) §2.2-2.3 (pp. 1179-1182),
+but *not* in Roy's own symbols. Roy writes the design matrix as $A$, the
+coefficient matrix as $\Theta$, and then reuses $B$ for the hypothesis
+(contrast) matrix and reuses $C$ for the covariance matrix of an estimator --
+none of which match how this package (or the general MANOVA literature)
+writes the model. Below uses the familiar
 
 $$
-\Lambda = \prod_{i=1}^{p} \lambda_i, \qquad
-\lambda_i = \frac{\text{error SS for } Y_i \mid Y_1,\dots,Y_{i-1}}
-                 {\text{error} + \text{hypothesis SS for } Y_i \mid Y_1,\dots,Y_{i-1}}
+Y = XB + \text{error}, \qquad \mathcal{H}_0 : \Phi = CB = 0
 $$
 
-Each $\lambda_i$ is exactly the univariate "Wilks' lambda" for the stepdown
-ANCOVA F-test of $Y_i$ from Sketch 2 above, related to its stepdown $F_i$ the
-usual univariate way ($\lambda_i = 1 / (1 + (df_h/df_e) F_i)$ for the $X$
-terms' hypothesis and error df at that step).
+convention instead -- $X_{n\times m}$ the design matrix (rank $r$), $B_{m\times
+p}$ the coefficient matrix, $C_{t\times m}$ the **hypothesis/contrast
+matrix** of rank $t$ (your guess was right: $\Phi = CB$ *is* the general
+linear hypothesis, with $t$ = the hypothesis df, e.g. $g-1$ for a one-way
+group effect). Everywhere Roy's own eq. numbers are cited as (R*n*) for
+traceability, but the symbols are ours, not his. Roy also silently
+*reindexes* partway through his own §2.3 -- his eqs. (12)-(15) describe "given
+$Y_i$, predict $y_{i+1}$" (subscript $i$ = conditioning set), while his eqs.
+(16)-(23) switch to subscript $i$ meaning "the test at step $i$." That
+mismatch is worth naming as a second, independent source of confusion in the
+original, on top of the $A/\Theta/B/C$ symbol reuse. Below uses one
+consistent convention throughout: **step $i$ tests $y_i$, conditional on
+$Y_{i-1} = [y_1 \cdots y_{i-1}]$** -- matching how the rest of this note
+already describes the procedure.
 
-So the product of the $p$ stepdown $\lambda_i$'s **reconstructs the overall
-multivariate $\Lambda$ exactly**, and -- this is Roy's actual result, not just
-an identity -- the $p$ stepdown F-tests are *mutually independent* under the
-null. That's what makes "test each step, reject overall if any step is
-significant" a valid decomposition of the single multivariate test, rather
-than just a post-hoc probe.
+### Setup
 
-This is standard material covered in general multivariate-methods texts (e.g.
-Bock 1975; Timm 2002) but I have not yet pinned down a fully worked citable
-derivation for this note -- worth doing before writing this up for a paper or
-vignette, but the identity itself is well established and not really in
-question.
+For the overall MLM, $\mathcal{E}Y = XB$, the hypothesis $\mathcal{H}_0: \Phi
+= CB = 0$ is tested via the error and hypothesis SSCP matrices
+
+$$
+\mathbf{E} = Y'P_E Y, \qquad \mathbf{H} = Y'P_H Y \tag{R9}
+$$
+
+for idempotent projections $P_E$ (rank $n-r$, error) and $P_H$ (rank $t$,
+hypothesis), giving the likelihood-ratio test
+
+$$
+\Lambda = \frac{|\mathbf{E}|}{|\mathbf{E}+\mathbf{H}|} \tag{R10}
+$$
+
+-- exactly the overall Wilks' $\Lambda$ already used elsewhere in this note,
+with $\mathbf{H}$ the SSCP for the $X$ terms and $n-r$ the error df of the
+full MLM.
+
+### The stepdown conditional model *is* the ANCOVA step (Roy §2.3, eqs. 12-15, reindexed)
+
+Let $b_i$ be column $i$ of $B$ (the $X$-coefficients for response $y_i$),
+$B_{i-1} = [b_1 \cdots b_{i-1}]$, and $\Sigma_{i-1}$ the top-left
+$(i-1)\times(i-1)$ block of $\Sigma$ (with $\Sigma_0 \equiv 1$, a formal
+placeholder so the $i=1$ case needs no special-casing). Condition on
+$Y_{i-1}$ and look at the conditional distribution of $y_i$. Because the rows
+of $Y$ are iid multivariate normal, that conditional distribution is itself
+an ordinary univariate general linear model,
+
+$$
+\mathcal{E}\,y_i \mid Y_{i-1} = X\eta_i + Y_{i-1}\gamma_{i-1} \tag{R12}
+$$
+
+$$
+\gamma_{i-1} = \Sigma_{i-1}^{-1}(\sigma_{1,i}, \dots, \sigma_{i-1,i})', \qquad
+\eta_i = b_i - B_{i-1}\gamma_{i-1}, \qquad
+\sigma_i^2 = \frac{|\Sigma_i|}{|\Sigma_{i-1}|} \tag{R13-15}
+$$
+
+($\gamma_0$ and $B_0$ are empty/null, so $\eta_1 = b_1$ and $\sigma_1^2 =
+\sigma_{11}$ at step 1, with no covariates.) Reading this off directly:
+$\gamma_{i-1}$ is the population regression of $y_i$ on $y_1,\dots,y_{i-1}$
+(nothing to do with the $X$ terms -- it's the covariate-adjustment step);
+$\eta_i$ is the $X$-effect coefficient vector $b_i$ *adjusted* for that
+regression; and $\sigma_i^2$ is the residual (conditional) variance of $y_i$
+given $y_1,\dots,y_{i-1}$. (R12) says the conditional model for $y_i$ given
+$Y_{i-1}$ has the *same* design matrix $X$ (same $X$ terms) plus $Y_{i-1}$ as
+covariates -- i.e. this is precisely
+`lm(y_i ~ x1 + x2 + ... + y1 + ... + y(i-1))`, Sketch 2's step $i$, derived
+from first principles rather than assumed.
+
+### The stepdown F (Roy §2.3, eqs. 16-17, 22)
+
+Testing $\mathcal{H}_{0,i}: \Phi_i = C\eta_i = 0$ -- the *same* hypothesis
+matrix $C$ as the overall test, now applied to the adjusted coefficient
+$\eta_i$ instead of $b_i$ -- gives, by the ordinary univariate GLM result
+(R2) applied to model (R12),
+
+$$
+F_i \equiv \frac{(\hat\Phi_i - \Phi_i)'V_i^{-1}(\hat\Phi_i-\Phi_i)/t}
+                {s_i^2/(n-r-i+1)}, \qquad i = 1,\dots,p \tag{R17}
+$$
+
+where $V_i$ is the (scaled) covariance matrix of the estimator $\hat\Phi_i$
+(this is what Roy calls "$C$" in his §2.1 -- renamed here to $V$ to keep it
+distinct from the hypothesis matrix $C$). $F_i$ is distributed, conditional
+on $Y_{i-1}$, as $F(t,\ n-r-i+1)$. This is exactly the joint stepdown F-test
+for the $X$ terms in the ANCOVA at step $i$ -- `RoyBargmann()`'s per-step
+full-vs-reduced comparison. The error df $n-r-i+1$ matches the
+implementation directly: $n-r$ at step 1 (no covariates), losing one more df
+per additional $Y_{i-1}$ covariate.
+
+### Independence of the stepdown F's (Roy §2.3, p. 1181, between eqs. 17 and 18)
+
+This is Roy's actual theorem, not an assumption (quoted, with his original
+subscript convention intact since it's a direct quote): "the statistic $F_i$
+involves only $Y_i$ ($i = 1, 2, \dots, p$) and [...] the conditional
+distribution of $F_i$, given $Y_{i-1}$, does not involve $Y_{i-1}$ [...]
+Therefore the statistics $F_1, F_2, \dots, F_p$ are independent."
+
+Spelled out: $F_i$'s conditional distribution given $Y_{i-1}$ is the fixed
+$F(t, n-r-i+1)$ law from (R17), with no dependence left on $Y_{i-1}$'s
+realized value. Since $F_1,\dots,F_{i-1}$ are themselves functions only of
+$Y_{i-1}$ (each $F_j$, $j<i$, is a function of $Y_j \subseteq Y_{i-1}$), $F_i$
+is independent of $(F_1,\dots,F_{i-1})$ for every $i$ -- hence, by induction,
+all $p$ are mutually independent. That's what licenses treating "accept
+$\mathcal{H}_{0,i}$ for all $i$" as a valid decomposition of the compound
+test with combined level $P = \prod_{i=1}^p (1-\alpha_i)$ (Roy's eq. 19),
+rather than a set of correlated post-hoc probes.
+
+### The $\Lambda$-product identity (Roy §2.3, eq. 23)
+
+Roy states this explicitly as a known result (citing Wilks for the moments
+of $L$ under $\mathcal{H}_0$), with $u_i$ the value of $F_i$'s numerator
+statistic evaluated under $\Phi_i = 0$ (his eq. 22):
+
+$$
+L \equiv \Lambda = \prod_{i=1}^{p} \frac{(n-r-i+1)}{t + (n-r-i+1)\,u_i}
+\tag{R23}
+$$
+
+Dividing numerator and denominator by $(n-r-i+1)$ gives the form used
+earlier in this note:
+
+$$
+\Lambda = \prod_{i=1}^p \lambda_i, \qquad
+\lambda_i = \frac{1}{1 + \dfrac{t}{n-r-i+1}\,F_i}
+$$
+
+which is exactly `1 / (1 + (df1/df2) * Fstat)` in the `Anova.RoyBargmann()`
+sketch's `lambda` column, and confirms `cum.lambda[p]` (the cumulative
+product) reconstructs the overall $\Lambda$ exactly -- this is a derived
+identity from the source, not just a documented sanity check.
+
+### Notation crosswalk (this note $\to$ Roy 1958)
+
+| This note | Roy's symbol | Meaning |
+|---|---|---|
+| $X$ | $A$ | design matrix for the terms under test (the "$X$ terms") |
+| $B$ | $\Theta$ | full coefficient matrix ($m \times p$) |
+| $b_i$, $B_{i-1}$ | $\theta_i$ (relabeled), $\Theta_{i-1}$ (relabeled) | column $i$ of $B$; first $i-1$ columns |
+| $C$ | $B$ | hypothesis/contrast matrix ($t \times m$, rank $t$), in $\Phi = CB$ |
+| $\Phi$ | $\Phi$ | the estimable hypothesis, $\Phi = CB$ (overall) or $C\eta_i$ (step $i$) |
+| $\gamma_{i-1}$ | $\beta_{i-1}$ (relabeled) | stepdown regression of $y_i$ on $Y_{i-1}$ (covariate adjustment) |
+| $\eta_i$ | $\eta_i$ | $b_i$ adjusted for $\gamma_{i-1}$ (unchanged, but reindexed to mean "for testing $y_i$") |
+| $V_i$ | $C_i$ | scaled covariance matrix of $\hat\Phi_i$ (renamed to avoid clashing with hypothesis matrix $C$) |
+| $\mathbf{E}, \mathbf{H}$ | $S_e, S_h$ | error / hypothesis SSCP matrices |
+
+### Summary: what's now settled vs. still open
+
+* **Settled, with citation**: the stepdown ANCOVA model (R12) *is* Sketch 2;
+  the stepdown F (R17) *is* `RoyBargmann()`'s per-step joint test; the $p$
+  stepdown F's are mutually independent (proven, not assumed); and $\Lambda =
+  \prod \lambda_i$ exactly (R23), reconciling the compound multivariate test
+  with the $p$ univariate ones.
+* **Still open**: Roy (1958) doesn't use the name "Bargmann" anywhere in this
+  paper -- see [Open attribution question](#open-attribution-question) below,
+  still unresolved.
+* Bock (1975, pp. 153-154) was offered as a fallback if Roy's notation proved
+  too opaque to extract a citable derivation from -- turned out not to be
+  needed, since Roy's own eqs. (12)-(23) give the full derivation directly,
+  once re-expressed in $X/B/C$ notation as above. Still worth a skim later
+  purely for exposition to crib from when writing this up for a vignette.
 
 ---
 
@@ -446,7 +582,12 @@ print.RoyBargmann <- function(x, ...) {
   <https://projecteuclid.org/euclid.aoms/1177706449>). Confirmed directly
   from this source: at step $i$ the test is univariate, conditional on
   $Y_1, \dots, Y_{i-1}$; the compound hypothesis holds only if every
-  component univariate hypothesis holds.
+  component univariate hypothesis holds. **§2.2-2.3 (pp. 1179-1182, eqs.
+  9-23) is now the primary source for the [Relation to overall Wilks'
+  Λ](#relation-to-overall-wilks-lambda) derivation above** -- the stepdown
+  ANCOVA model, the stepdown F, its independence proof, and the exact
+  $\Lambda = \prod \lambda_i$ identity are all worked there directly, not
+  just asserted from secondary sources.
   
 * Roy, S. N., & Bargmann, R. E. (1958). Tests of Multiple Independence and the Associated Confidence
   Bounds. The Annals of Mathematical Statistics, 29(2), 491–503.
@@ -459,10 +600,13 @@ print.RoyBargmann <- function(x, ...) {
   [Finch, "Performance of the Roy-Bargmann Stepdown Procedure as a Follow Up to a Significant MANOVA"](https://www.semanticscholar.org/paper/Performance-of-the-Roy-Bargmann-Stepdown-Procedure-Finch/394bca3bb0f25869318d18c2d57188be3335efee).
 
 * Bock, R. D. (1975). *Multivariate Statistical Methods in Behavioral
-  Research*. McGraw-Hill. -- standard textbook treatment of stepdown analysis
-  and its relation to Wilks' $\Lambda$; not yet re-checked against this note,
-  worth doing before citing formally.
+  Research*. McGraw-Hill, pp. 153-154. -- standard textbook treatment of
+  stepdown analysis and its relation to Wilks' $\Lambda$; not needed to
+  source the derivation above (Roy's own eqs. 12-23 sufficed) but still
+  worth a skim later for expository notation when writing this up for a
+  vignette or paper.
 
 * Timm, N. H. (2002). *Applied Multivariate Analysis*. Springer. -- likewise,
-  a standard reference for the $\Lambda$-decomposition result; not yet
-  re-checked.
+  a standard reference for the $\Lambda$-decomposition result; not
+  re-checked, now lower priority since Roy (1958) itself is cited directly
+  above.
