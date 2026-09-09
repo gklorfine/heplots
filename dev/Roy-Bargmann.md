@@ -268,9 +268,8 @@ identity from the source, not just a documented sanity check.
   stepdown F's are mutually independent (proven, not assumed); and $\Lambda =
   \prod \lambda_i$ exactly (R23), reconciling the compound multivariate test
   with the $p$ univariate ones.
-* **Still open**: Roy (1958) doesn't use the name "Bargmann" anywhere in this
-  paper -- see [Open attribution question](#open-attribution-question) below,
-  still unresolved.
+* **Attribution: resolved** -- see
+  [Open attribution question](#open-attribution-question) below.
 * Bock (1975, pp. 153-154) was offered as a fallback if Roy's notation proved
   too opaque to extract a citable derivation from -- turned out not to be
   needed, since Roy's own eqs. (12)-(23) give the full derivation directly,
@@ -279,15 +278,15 @@ identity from the source, not just a documented sanity check.
 
 ---
 
-## Open attribution question
+## Open attribution question -- resolved
 
-Sources consistently write "Roy-Bargmann," but the single reference the user
-supplied is Roy (1958) alone. Bargmann is sometimes credited (in an
-unpublished dissertation/technical report, ~1962-70) with formalizing the
-ANCOVA-based computational procedure people actually use today from Roy's
-more general step-down principle. Worth pinning down the actual Bargmann
-citation before writing anything citable (a vignette, paper, or even
-`RoyBargmann()`'s `@references`) -- flagging here rather than guessing.
+Sources consistently write "Roy-Bargmann," but the derivation above cites
+Roy (1958) alone, which never mentions Bargmann. The co-authored reference,
+Roy, S. N., & Bargmann, R. E. (1958), *Tests of Multiple Independence and
+the Associated Confidence Bounds*, has now been added to the References
+below -- that's the actual Bargmann citation backing the "Roy-Bargmann" name,
+so this is safe to cite in `RoyBargmann()`'s `@references`, a vignette, or a
+paper.
 
 ---
 
