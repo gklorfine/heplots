@@ -45,6 +45,12 @@ tests "the _conditional_ univariate distribution of the $i$-th variate given the
 first $i-1$ variates," and "the compound multivariate hypothesis is accepted
 [only] if all the component univariate hypotheses are accepted."
 
+**What it tests**: In the case of a one-way MANOVA design, the $k$th step-down $F$ statistic tests the hypothesis that the means for $\mathbf{Y}_k = $Y_{k1}, Y_{k2}, \dots, Y_{kg}$
+do not differ, with all variation due to the variables $\mathbf{Y}_1, $\mathbf{Y}_2, \dots, $\mathbf{Y}_{k-1}$ eliminated.
+Rejection of this hypothesis implies that the $k$th variable is reflecting differences between
+groups that cannot be accounted for by any linear combinations of the previous $k-1$ responses.
+(Bock, 1975, p. 411)
+
 ### Related motivating idea
 
 This is similar, on the Y side, to what is done in _sequential, Type I_ tests for the Xs
@@ -378,6 +384,7 @@ print.RoyBargmann <- function(x, ...) {
   just holds the raw `SSP`/`SSPE`/`df` per term -- the actual Wilks/Pillai/
   etc. statistic is only computed inside `print.Anova.mlm()` /
   `summary.Anova.mlm()`. Two implications for us:
+  
     + Our hand-rolled full-vs-reduced comparison in the sketch above is
       still necessary in general (car's per-term `Anova.lm()` rows test
       each `x` term *separately*, not jointly) -- except in the single-
@@ -440,6 +447,10 @@ print.RoyBargmann <- function(x, ...) {
   from this source: at step $i$ the test is univariate, conditional on
   $Y_1, \dots, Y_{i-1}$; the compound hypothesis holds only if every
   component univariate hypothesis holds.
+  
+* Roy, S. N., & Bargmann, R. E. (1958). Tests of Multiple Independence and the Associated Confidence
+  Bounds. The Annals of Mathematical Statistics, 29(2), 491–503.
+  https://doi.org/10.1214/aoms/1177706624
 
 * Secondary descriptions consulted (general confirmation of the ANCOVA-style
   procedure, not the $\Lambda$-decomposition detail):
