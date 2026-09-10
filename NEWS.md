@@ -6,15 +6,13 @@
   worked MANOVA/MANCOVA examples and, in particular, a citable, hand-checkable
   example for the Roy-Bargmann stepdown analysis under development. Its
   `Disability` factor is ordered (`Mild < Moderate < Severe`).
+  
 * Added the `ReadingDisability` dataset: 571 children classified into four
   reading-achievement groups (`Severe`/`Mild`/`Average`/`Superior`, an ordered
   factor) on six cognitive/achievement measures (`PPVT`, `RD`, `EF`, `VF`,
   `VMI`, `SIM`). Reconstructed by simulation from the group means, SDs, and
   pooled within-cells correlations in Bray & Maxwell (1985, *Multivariate
-  Analysis of Variance*, Table 2.3) -- individual rows are synthetic, but
-  reproduce that table's reported moments exactly. See `ReadingDisability`'s
-  `@source` for a caveat: B&M's own in-text attribution (Fletcher & Satz,
-  1980) does not appear in their References section, so it is unconfirmed.
+  Analysis of Variance*, Table 2.3). 
 
 ## Version 1.8.4
 
