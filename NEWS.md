@@ -1,3 +1,11 @@
+## Version 1.8.5
+
+* Added the `LearnDis` dataset (Tabachnick & Fidell, 2013, Table 7.1): a small
+  3 (Disability: Mild/Moderate/Severe) x 2 (Treatment/Control) factorial giving
+  reading (`WRAT_R`) and arithmetic (`WRAT_A`) achievement scores and `IQ`, for
+  worked MANOVA/MANCOVA examples and, in particular, a citable, hand-checkable
+  example for the Roy-Bargmann stepdown analysis under development.
+
 ## Version 1.8.4
 
 CRAN resubmission of v1.8.3, addressing two `URL` findings from the win-builder
