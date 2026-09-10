@@ -293,9 +293,13 @@ paper.
 ## Implementation sketch for `RoyBargmann()` (for the follow-up)
 
 Not attempting this yet -- just noting the shape of it for next time. Design
-settled on 2026-09-08: `RoyBargmann()` takes the *same* model formula as the
+settled on 2026-09-08: `RoyBargmann()` 
+
+* takes the *same* model formula as the
 overall MLM (`cbind(y1, ..., yp) ~ x1 + x2 + ...`), reads the response
-priority order directly off the `cbind()`, and returns an object holding the
+priority order directly off the `cbind()`, 
+
+* it returns an object holding the
 $p$ fitted stepdown `"lm"` models -- an `"lmlist"` -- with `Anova()`,
 `summary()`, `coef()`, and `print()` methods hung off it.
 
