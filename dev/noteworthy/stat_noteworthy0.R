@@ -1,3 +1,8 @@
+# Renamed from stat_noteworthy.R (2026-09-10) to free up that name for the more developed
+# continuation of this same idea, done separately in the ggbiplot package and moved into
+# dev/noteworthy/stat_noteworthy.R -- see that file's header for the lineage. This is the
+# original, unfinished/unexported prototype; kept for reference, not superseded/deleted.
+#
 # https://github.com/ggplot2-extenders/ggplot-extension-club/discussions/91
 # library(ggplot2)
 # library(ggrepel)

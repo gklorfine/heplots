@@ -122,11 +122,17 @@ have actually been deleted yet, so all stay unchecked until the cleanup itself h
   `plot.boxM_boot.R`, `plot.boxM_with_bootstrap.R`, `traceCI.R` -- have been deleted.)
 
 - [ ] `dev/noteworthy0.R`, `dev/noteworthy0a.R` — earlier drafts superseded by `R/noteworthy.R`.
-  Also note: `dev/noteworthy/` (2026-09-10, moved in from the `ggbiplot` package's own
-  `dev/` — ggplot2 extension of the noteworthy-points idea) has a `stat_noteworthy.R` that
-  collides in name with the pre-existing `dev/stat_noteworthy.R` here; these are two
-  different files (heplots-native vs. ggbiplot-derived) — needs a deliberate look before
-  any further `dev/noteworthy*` consolidation.
+
+- `dev/noteworthy/` (2026-09-10, moved in from the `ggbiplot` package's own `dev/` — a
+  ggplot2 `stat_noteworthy()`/`StatNoteworthy` extension built on the already-shipped
+  `heplots::noteworthy()`): `stat_noteworthy.R`, `test-noteworthy.R`,
+  `ggextenders-noteworthy.md`, `peng-out-test.R`. Its `stat_noteworthy.R` name collided with
+  a pre-existing, separate `dev/stat_noteworthy.R` (heplots' own earlier, unfinished attempt
+  at the same idea) -- resolved 2026-09-10 by renaming the older one to
+  `stat_noteworthy0.R` (matching the `noteworthy0.R`/`noteworthy0a.R` "earlier draft"
+  convention above) and moving it alongside its continuation, into
+  `dev/noteworthy/stat_noteworthy0.R`; both files kept in full, nothing deleted,
+  cross-references between them updated.
 
 ## Not flagged (intentionally kept)
 
