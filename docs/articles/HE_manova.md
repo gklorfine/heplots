@@ -1,6 +1,6 @@
 # HE plot MANOVA Examples
 
-Vignette built using `heplots`, version 1.8.3 and `candisc`, version
+Vignette built using `heplots`, version 1.8.5 and `candisc`, version
 1.1.1.
 
 ## Multivariate Analysis of Variance Designs

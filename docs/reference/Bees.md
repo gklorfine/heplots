@@ -151,6 +151,7 @@ if(require(effects)) {
   plot(bees.eff2,multiline=TRUE,ask=FALSE)
 }
 #> Loading required package: effects
+#> Warning: package 'effects' was built under R version 4.5.3
 #> Registered S3 method overwritten by 'lme4':
 #>   method           from
 #>   na.action.merMod car 

@@ -124,6 +124,7 @@ str(Rohwer)
 
 # Plot responses against each predictor
 library(tidyr)
+#> Warning: package 'tidyr' was built under R version 4.5.3
 library(dplyr)
 library(ggplot2)
 

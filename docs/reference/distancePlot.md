@@ -163,6 +163,7 @@ if(require("robustbase")) {
   distancePlot(pulp.mod, method = "mcd")
 }
 #> Loading required package: robustbase
+#> Warning: package 'robustbase' was built under R version 4.5.3
 
 
 

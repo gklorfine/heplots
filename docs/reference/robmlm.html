@@ -35,7 +35,7 @@ to visualize those that were down-weighted."><meta property="og:image" content="
 
     <a class="navbar-brand me-2" href="../index.html">heplots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -353,27 +353,27 @@ Robust Statistics</em>.  Wadsworth &amp; Brooks/Cole.</p>
 <span class="r-in"><span><span class="va">prestige.rmod</span> <span class="op">&lt;-</span> <span class="fu">robmlm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">women</span>, <span class="va">prestige</span><span class="op">)</span> <span class="op">~</span> <span class="va">income</span> <span class="op">+</span> <span class="va">education</span> <span class="op">+</span> <span class="va">type</span>, data<span class="op">=</span><span class="va">Prestige</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">prestige.mod</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    women     prestige</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 29.638865042 -0.622929165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> income      -0.004594789  0.001013193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> education    1.677749298  3.673166052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typeprof    20.761455686  6.038970651</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typewc      27.911084356 -2.737230718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     women     prestige</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  45.863045056  0.477650813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> income       -0.004594789  0.001013193</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> education     1.677749298  3.673166052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type1       -16.224180014 -1.100579978</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type2         4.537275672  4.938390673</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">prestige.rmod</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    women     prestige</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) 24.696906731  0.019651597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> income      -0.004902077  0.001082214</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> education    2.352283991  3.549614674</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typeprof    18.737098949  6.394466644</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typewc      26.762870920 -2.570933052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     women     prestige</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  39.863570196  1.294161702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> income       -0.004902076  0.001082214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> education     2.352282874  3.549614837</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type1       -15.166658823 -1.274510880</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type2         3.570443416  5.119955249</span>
 <span class="r-in"><span><span class="co"># how much do coefficients change?</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">prestige.mod</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">prestige.rmod</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              women prestige</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  4.942   -0.643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  5.999   -0.817</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> income       0.000    0.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> education   -0.675    0.124</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typeprof     2.024   -0.355</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> typewc       1.148   -0.166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type1       -1.058    0.174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> type2        0.967   -0.182</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># pretty plot of case weights</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">prestige.rmod</span><span class="op">$</span><span class="va">weights</span>, type<span class="op">=</span><span class="st">"h"</span>, xlab<span class="op">=</span><span class="st">"Case Index"</span>, ylab<span class="op">=</span><span class="st">"Robust mlm weight"</span>, col<span class="op">=</span><span class="st">"gray"</span><span class="op">)</span></span></span>

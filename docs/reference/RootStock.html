@@ -11,7 +11,7 @@ How do the measures of size vary with the type of rootstock?"><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">heplots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,11 +117,11 @@ New York: Wiley, Table 6.2</p>
 <span class="r-in"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html" class="external-link">linearHypothesis</a></span><span class="op">(</span><span class="va">root.mod</span>, <span class="va">hyp</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sum of squares and products for the hypothesis:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            girth4      ext4   girth15 weight15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> girth4   2.684223  7.573365  7.792122 1.617892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ext4     7.573365 22.489458 23.293194 5.760003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> girth15  7.792122 23.293194 24.145778 6.090615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> weight15 1.617892  5.760003  6.090615 2.248755</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             girth4     ext4  girth15  weight15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> girth4    47.48611 115.5903 173.7852  44.15037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ext4     115.59029 281.8656 422.4499 107.33257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> girth15  173.78523 422.4499 636.6727 161.73755</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weight15  44.15037 107.3326 161.7376  41.08725</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sum of squares and products for error:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             girth4      ext4   girth15 weight15</span>
@@ -131,11 +131,11 @@ New York: Wiley, Table 6.2</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> weight15 0.2171400  2.110214 2.4816562 1.722525</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Multivariate Tests: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  Df test stat  approx F num Df den Df     Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Pillai            2  1.426293  24.86102      8     80 &lt; 2.22e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Wilks             2  0.020401  58.51245      8     78 &lt; 2.22e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Hotelling-Lawley  2 26.121884 124.07895      8     76 &lt; 2.22e-16 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Roy               2 25.254884 252.54884      4     40 &lt; 2.22e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  Df test stat approx F num Df den Df     Pr(&gt;F)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Pillai            2    1.2041   15.127      8     80 2.7891e-13 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Wilks             2    0.0013  260.659      8     78 &lt; 2.22e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hotelling-Lawley  2  610.2339 2898.611      8     76 &lt; 2.22e-16 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Roy               2  609.9749 6099.749      4     40 &lt; 2.22e-16 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="r-in"><span><span class="fu"><a href="heplot.html">heplot</a></span><span class="op">(</span><span class="va">root.mod</span>, hypotheses<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Contrasts<span class="op">=</span><span class="va">hyp</span>, C1<span class="op">=</span><span class="va">hyp</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, C2<span class="op">=</span><span class="va">hyp</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>

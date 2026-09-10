@@ -85,6 +85,7 @@ plot(schooldata)
 
 # better plot
 library(corrgram)
+#> Warning: package 'corrgram' was built under R version 4.5.3
 corrgram(schooldata, 
          lower.panel=panel.ellipse, 
          upper.panel=panel.pts)

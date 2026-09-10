@@ -19,7 +19,7 @@ The two response variables are: TCAD and AMI. The other variables are predictors
 
     <a class="navbar-brand me-2" href="../index.html">heplots</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,13 +132,13 @@ Exercise 7.25, p. 426.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">over.mlm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">TCAD</span>, <span class="va">AMI</span><span class="op">)</span> <span class="op">~</span> <span class="va">Gender</span> <span class="op">+</span> <span class="va">amount</span> <span class="op">+</span> <span class="va">BP</span> <span class="op">+</span> <span class="va">ECG_PR</span> <span class="op">+</span> <span class="va">ECG_QRS</span>, data <span class="op">=</span> <span class="va">Overdose</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">over.mlm</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       TCAD           AMI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)  -2879.4782461 -2728.7085444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GenderFemale   675.6507805   763.0297617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> amount           0.2848511     0.3063734</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BP               7.2511714     7.2055597</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ECG_PR          10.2721328     8.8961977</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ECG_QRS          7.5982397     4.9870508</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      TCAD           AMI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) -2541.6528558 -2347.1936636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Gender1      -337.8253903  -381.5148808</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> amount          0.2848511     0.3063734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BP              7.2511714     7.2055597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ECG_PR         10.2721328     8.8961977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ECG_QRS         7.5982397     4.9870508</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># check for outliers</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="cqplot.html">cqplot</a></span><span class="op">(</span><span class="va">over.mlm</span><span class="op">)</span></span></span>

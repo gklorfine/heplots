@@ -84,7 +84,9 @@ Adopted.mod
 
 require(car)
 #> Loading required package: car
+#> Warning: package 'car' was built under R version 4.5.3
 #> Loading required package: carData
+#> Warning: package 'carData' was built under R version 4.5.3
 #> 
 #> Attaching package: 'car'
 #> The following object is masked from 'package:dplyr':

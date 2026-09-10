@@ -467,7 +467,6 @@ in the `Y` responses) and leverage points (unusual in the `X`s).
 ``` r
 
 distancePlot(pottery.rlm)
-#> 0.975 X, Y distance cutoffs: 3.058 3.582
 ```
 
 ![Distance plot for the robust Pottery model: Mahalanobis distances of
@@ -693,9 +692,7 @@ two, both using the robust-fit residuals from `pulp.rlm`:
 
 op <- par(mfrow = c(1, 2))
 distancePlot(pulp.rlm, method = "classical", main = "Classical distances")
-#> 0.975 X, Y distance cutoffs: 3.338 3.338
 distancePlot(pulp.rlm, method = "mcd", main = "MCD distances")
-#> 0.975 X, Y distance cutoffs: 3.338 3.338
 ```
 
 ![Distance plots for the robust pulp fiber model, comparing classical
