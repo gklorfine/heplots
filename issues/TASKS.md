@@ -50,6 +50,12 @@ for a Gavin funding-application topic list).
   Files: `dev/equatiomatic-notes.md`, `dev/equatiomatic.R`, `dev/equatiomatic-test.R`,
   `dev/equatiomatic-notes.html`
 
+- ✔️ **DONE** `traceCI()` — analytic (asymptotic, Bai & Silverstein 2004) CI for the trace
+  (sum of eigenvalues) of a covariance matrix, complementing `logdetCI()` (determinant) and
+  `eigstatCI()` (bootstrap CIs for product/sum/precision/max). Shipped as `R/traceCI.R`
+  2026-09-10 (see `NEWS.md`); the `dev/boxM/traceCI.R` source draft has been deleted as a
+  stale duplicate.
+
 - [ ] `pred.mlm()` — extend `predict.lm`-style CIs/PIs to multivariate (`mlm`) models; draft only
   (`pred.mlm0`), not yet roxygenized or added to `R/`.
   File: `dev/pred.mlm.R`
@@ -105,16 +111,28 @@ have actually been deleted yet, so all stay unchecked until the cleanup itself h
 
 - [ ] `issues/label-ellipse/` — resolved (`label.ellipse()` rewrite); has `IMPLEMENTATION_SUMMARY.md`.
 
-- [ ] `dev/test_eigstatCI.R`, `dev/test_traceCI.R`, `dev/test_fix.R`, `dev/test_labels.R`,
-  `dev/test_pooled_alignment.R`, `dev/debug_ci_alignment.R`, `dev/verify_ci_alignment.R`,
-  `dev/compare_trace_methods.R`, `dev/demo_traceCI.R` — scratch/debug scripts used to build
-  `traceCI()`/`eigstatCI()`, now shipped as `R/traceCI.R`/`R/eigstatCI.R`.
+- [ ] `dev/boxM/` (2026-09-10: grouped here from loose files directly in `dev/`) —
+  remaining scratch/debug/planning work around `boxM()`, `plot.boxM()`, and `eigstatCI()`:
+  `boot_cov.R`, `test_eigstatCI.R`, `test_traceCI.R`, `test_fix.R`, `test_labels.R`,
+  `test_pooled_alignment.R`, `debug_ci_alignment.R`, `verify_ci_alignment.R`,
+  `compare_trace_methods.R`, `demo_traceCI.R`, `README_traceCI.md`, `README_eigstatCI.md`,
+  `eigstats-analytic.md`, `integrate_traceCI_plan.md`, `boxm-CI-align-test.jpg` — worth a
+  skim before deleting in case anything belongs in a vignette, otherwise discard. (2026-09-10:
+  the five stale duplicates of shipped code that were also here -- `boxM.R`, `eigstatCI.R`,
+  `plot.boxM_boot.R`, `plot.boxM_with_bootstrap.R`, `traceCI.R` -- have been deleted.)
 
 - [ ] `dev/noteworthy0.R`, `dev/noteworthy0a.R` — earlier drafts superseded by `R/noteworthy.R`.
 
-- [ ] `dev/README_traceCI.md`, `dev/README_eigstatCI.md`, `dev/eigstats-analytic.md`,
-  `dev/integrate_traceCI_plan.md` — planning/dev notes for now-shipped features; worth a skim
-  before deleting in case anything belongs in a vignette, otherwise discard.
+- `dev/noteworthy/` (2026-09-10, moved in from the `ggbiplot` package's own `dev/` — a
+  ggplot2 `stat_noteworthy()`/`StatNoteworthy` extension built on the already-shipped
+  `heplots::noteworthy()`): `stat_noteworthy.R`, `test-noteworthy.R`,
+  `ggextenders-noteworthy.md`, `peng-out-test.R`. Its `stat_noteworthy.R` name collided with
+  a pre-existing, separate `dev/stat_noteworthy.R` (heplots' own earlier, unfinished attempt
+  at the same idea) -- resolved 2026-09-10 by renaming the older one to
+  `stat_noteworthy0.R` (matching the `noteworthy0.R`/`noteworthy0a.R` "earlier draft"
+  convention above) and moving it alongside its continuation, into
+  `dev/noteworthy/stat_noteworthy0.R`; both files kept in full, nothing deleted,
+  cross-references between them updated.
 
 ## Not flagged (intentionally kept)
 

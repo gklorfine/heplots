@@ -80,6 +80,7 @@ export(robmlm)
 export(statList)
 export(termMeans)
 export(text_usr)
+export(traceCI)
 export(trans.colors)
 export(uniStats)
 importFrom(MASS,

@@ -14,6 +14,10 @@
   pooled within-cells correlations in Bray & Maxwell (1985, *Multivariate
   Analysis of Variance*, Table 2.3). 
 
+* Added `traceCI()`: analytic (Bai & Silverstein, 2004) confidence intervals
+  for the trace (sum of eigenvalues) of one or more covariance matrices,
+  complementing `logdetCI()` and `eigstatCI()`.
+
 ## Version 1.8.4
 
 CRAN resubmission of v1.8.3, addressing two `URL` findings from the win-builder
