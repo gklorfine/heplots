@@ -133,8 +133,9 @@ traceCI <- function(cov, n, conf = 0.95) {
 
   # Check sample size
   if (any(n <= p)) {
-    warning(paste("Sample size n should be larger than dimension p =", p,
-                  "for asymptotic theory to apply"))
+    warning(glue::glue(
+      "Sample size n should be larger than dimension p = {p} ",
+      "for asymptotic theory to apply"))
   }
 
   # Calculate trace for each covariance matrix
