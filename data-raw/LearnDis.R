@@ -20,7 +20,8 @@
 LearnDis <- data.frame(
   Disability = factor(
     rep(rep(c("Mild", "Moderate", "Severe"), each = 3), times = 2),
-    levels = c("Mild", "Moderate", "Severe")
+    levels = c("Mild", "Moderate", "Severe"),
+    ordered = TRUE
   ),
   Treatment = factor(
     rep(c("Treatment", "Control"), each = 9),

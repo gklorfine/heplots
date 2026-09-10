@@ -9,8 +9,8 @@ A data frame with 18 observations on the following 5 variables, a
 3 (\code{Disability}) x 2 (\code{Treatment}) between-subjects factorial with
 n = 3 per cell.
 \describe{
-\item{\code{Disability}}{Degree of disability, a factor with levels
-\code{Mild} \code{Moderate} \code{Severe}}
+\item{\code{Disability}}{Degree of disability, an ordered factor with
+levels \code{Mild} < \code{Moderate} < \code{Severe}}
 \item{\code{Treatment}}{a factor with levels \code{Treatment} \code{Control}}
 \item{\code{WRAT_R}}{Wide Range Achievement Test, Reading subtest score,
 a numeric vector}

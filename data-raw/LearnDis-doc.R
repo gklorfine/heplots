@@ -18,8 +18,8 @@
 #' 3 (`Disability`) x 2 (`Treatment`) between-subjects factorial with
 #' n = 3 per cell.
 #' \describe{
-#'   \item{`Disability`}{Degree of disability, a factor with levels
-#'     `Mild` `Moderate` `Severe`}
+#'   \item{`Disability`}{Degree of disability, an ordered factor with
+#'     levels `Mild` < `Moderate` < `Severe`}
 #'   \item{`Treatment`}{a factor with levels `Treatment` `Control`}
 #'   \item{`WRAT_R`}{Wide Range Achievement Test, Reading subtest score,
 #'     a numeric vector}
