@@ -1,5 +1,22 @@
 # Changelog
 
+## Version 1.8.5
+
+- Added the `LearnDis` dataset (Tabachnick & Fidell, 2013, Table 7.1): a
+  small 3 (Disability: Mild/Moderate/Severe) x 2 (Treatment/Control)
+  factorial giving reading (`WRAT_R`) and arithmetic (`WRAT_A`)
+  achievement scores and `IQ`, for worked MANOVA/MANCOVA examples and,
+  in particular, a citable, hand-checkable example for the Roy-Bargmann
+  stepdown analysis under development. Its `Disability` factor is
+  ordered (`Mild < Moderate < Severe`).
+
+- Added the `ReadingDisability` dataset: 571 children classified into
+  four reading-achievement groups (`Severe`/`Mild`/`Average`/`Superior`,
+  an ordered factor) on six cognitive/achievement measures (`PPVT`,
+  `RD`, `EF`, `VF`, `VMI`, `SIM`). Reconstructed by simulation from the
+  group means, SDs, and pooled within-cells correlations in Bray &
+  Maxwell (1985, *Multivariate Analysis of Variance*, Table 2.3).
+
 ## Version 1.8.4
 
 CRAN release: 2026-08-23
@@ -171,10 +188,10 @@ This is largely a maintenance release, but adds a function to identify
   the `schooldata` dataset.
 - [`cqplot()`](https://friendly.github.io/heplots/reference/cqplot.md)
   now prints a warning if there are missing cases and also returns the
-  upper tail p-values corresponding to Mahalanobis $`D^2`$.
+  upper tail p-values corresponding to Mahalanobis $D^{2}$.
 - Default `method.id` in
   [`cqplot()`](https://friendly.github.io/heplots/reference/cqplot.md)
-  changed to “r”, to identify points with the largest $`D^2`$.
+  changed to “r”, to identify points with the largest $D^{2}$.
 - added `noteworthy(x, y)` as a utility to select “noteworthy”
   observations in a 2D plot, extending the ideas in
   [`car::showLabels()`](https://rdrr.io/pkg/car/man/showLabels.html)

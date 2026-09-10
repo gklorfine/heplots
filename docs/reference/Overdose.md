@@ -95,13 +95,13 @@ pairs(Overdose)
 
 over.mlm <- lm(cbind(TCAD, AMI) ~ Gender + amount + BP + ECG_PR + ECG_QRS, data = Overdose)
 coef(over.mlm)
-#>                       TCAD           AMI
-#> (Intercept)  -2879.4782461 -2728.7085444
-#> GenderFemale   675.6507805   763.0297617
-#> amount           0.2848511     0.3063734
-#> BP               7.2511714     7.2055597
-#> ECG_PR          10.2721328     8.8961977
-#> ECG_QRS          7.5982397     4.9870508
+#>                      TCAD           AMI
+#> (Intercept) -2541.6528558 -2347.1936636
+#> Gender1      -337.8253903  -381.5148808
+#> amount          0.2848511     0.3063734
+#> BP              7.2511714     7.2055597
+#> ECG_PR         10.2721328     8.8961977
+#> ECG_QRS         7.5982397     4.9870508
 
 # check for outliers
 cqplot(over.mlm)

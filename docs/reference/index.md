@@ -160,6 +160,9 @@ Utility functions
   Recovery from Elective Herniorrhaphy
 - [`Iwasaki_Big_Five`](https://friendly.github.io/heplots/reference/Iwasaki_Big_Five.md)
   : Personality Traits of Cultural Groups
+- [`LearnDis`](https://friendly.github.io/heplots/reference/LearnDis.md)
+  : Reading and Arithmetic Achievement in Children with Learning
+  Disabilities
 - [`MockJury`](https://friendly.github.io/heplots/reference/MockJury.md)
   : Effects Of Physical Attractiveness Upon Mock Jury Decisions
 - [`NLSY`](https://friendly.github.io/heplots/reference/NLSY.md) :
@@ -188,6 +191,8 @@ Utility functions
   : Weight Gain in Rats Exposed to Thiouracil and Thyroxin
 - [`ReactTime`](https://friendly.github.io/heplots/reference/ReactTime.md)
   : Reaction Time Data
+- [`ReadingDisability`](https://friendly.github.io/heplots/reference/ReadingDisability.md)
+  : Cognitive and Achievement Test Scores by Reading Level
 - [`Rohwer`](https://friendly.github.io/heplots/reference/Rohwer.md) :
   Rohwer Data Set
 - [`RootStock`](https://friendly.github.io/heplots/reference/RootStock.md)

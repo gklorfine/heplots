@@ -1,3 +1,19 @@
+## Version 1.8.5
+
+* Added the `LearnDis` dataset (Tabachnick & Fidell, 2013, Table 7.1): a small
+  3 (Disability: Mild/Moderate/Severe) x 2 (Treatment/Control) factorial giving
+  reading (`WRAT_R`) and arithmetic (`WRAT_A`) achievement scores and `IQ`, for
+  worked MANOVA/MANCOVA examples and, in particular, a citable, hand-checkable
+  example for the Roy-Bargmann stepdown analysis under development. Its
+  `Disability` factor is ordered (`Mild < Moderate < Severe`).
+  
+* Added the `ReadingDisability` dataset: 571 children classified into four
+  reading-achievement groups (`Severe`/`Mild`/`Average`/`Superior`, an ordered
+  factor) on six cognitive/achievement measures (`PPVT`, `RD`, `EF`, `VF`,
+  `VMI`, `SIM`). Reconstructed by simulation from the group means, SDs, and
+  pooled within-cells correlations in Bray & Maxwell (1985, *Multivariate
+  Analysis of Variance*, Table 2.3). 
+
 ## Version 1.8.4
 
 CRAN resubmission of v1.8.3, addressing two `URL` findings from the win-builder

@@ -225,7 +225,6 @@ John Fox; packaged by Michael Friendly
 ## Examples
 
 ``` r
-
 # Skulls data
 # -----------
 data(Skulls)
@@ -303,27 +302,27 @@ prestige.mod <- lm(cbind(women, prestige) ~ income + education + type, data=Pres
 prestige.rmod <- robmlm(cbind(women, prestige) ~ income + education + type, data=Prestige)
 
 coef(prestige.mod)
-#>                    women     prestige
-#> (Intercept) 29.638865042 -0.622929165
-#> income      -0.004594789  0.001013193
-#> education    1.677749298  3.673166052
-#> typeprof    20.761455686  6.038970651
-#> typewc      27.911084356 -2.737230718
+#>                     women     prestige
+#> (Intercept)  45.863045056  0.477650813
+#> income       -0.004594789  0.001013193
+#> education     1.677749298  3.673166052
+#> type1       -16.224180014 -1.100579978
+#> type2         4.537275672  4.938390673
 coef(prestige.rmod)
-#>                    women     prestige
-#> (Intercept) 24.696906731  0.019651597
-#> income      -0.004902077  0.001082214
-#> education    2.352283991  3.549614674
-#> typeprof    18.737098949  6.394466644
-#> typewc      26.762870920 -2.570933052
+#>                     women     prestige
+#> (Intercept)  39.863570196  1.294161702
+#> income       -0.004902076  0.001082214
+#> education     2.352282874  3.549614837
+#> type1       -15.166658823 -1.274510880
+#> type2         3.570443416  5.119955249
 # how much do coefficients change?
 round(coef(prestige.mod) - coef(prestige.rmod),3)
 #>              women prestige
-#> (Intercept)  4.942   -0.643
+#> (Intercept)  5.999   -0.817
 #> income       0.000    0.000
 #> education   -0.675    0.124
-#> typeprof     2.024   -0.355
-#> typewc       1.148   -0.166
+#> type1       -1.058    0.174
+#> type2        0.967   -0.182
 
 # pretty plot of case weights
 plot(prestige.rmod$weights, type="h", xlab="Case Index", ylab="Robust mlm weight", col="gray")

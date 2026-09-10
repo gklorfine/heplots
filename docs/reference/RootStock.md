@@ -47,7 +47,6 @@ Wiley, Table 6.2
 ## Examples
 
 ``` r
-
 library(car)
 data(RootStock)
 str(RootStock)
@@ -76,11 +75,11 @@ hyp <- matrix(c(2,-1,-1,-1,-1,2,
 car::linearHypothesis(root.mod, hyp)
 #> 
 #> Sum of squares and products for the hypothesis:
-#>            girth4      ext4   girth15 weight15
-#> girth4   2.684223  7.573365  7.792122 1.617892
-#> ext4     7.573365 22.489458 23.293194 5.760003
-#> girth15  7.792122 23.293194 24.145778 6.090615
-#> weight15 1.617892  5.760003  6.090615 2.248755
+#>             girth4     ext4  girth15  weight15
+#> girth4    47.48611 115.5903 173.7852  44.15037
+#> ext4     115.59029 281.8656 422.4499 107.33257
+#> girth15  173.78523 422.4499 636.6727 161.73755
+#> weight15  44.15037 107.3326 161.7376  41.08725
 #> 
 #> Sum of squares and products for error:
 #>             girth4      ext4   girth15 weight15
@@ -90,11 +89,11 @@ car::linearHypothesis(root.mod, hyp)
 #> weight15 0.2171400  2.110214 2.4816562 1.722525
 #> 
 #> Multivariate Tests: 
-#>                  Df test stat  approx F num Df den Df     Pr(>F)    
-#> Pillai            2  1.426293  24.86102      8     80 < 2.22e-16 ***
-#> Wilks             2  0.020401  58.51245      8     78 < 2.22e-16 ***
-#> Hotelling-Lawley  2 26.121884 124.07895      8     76 < 2.22e-16 ***
-#> Roy               2 25.254884 252.54884      4     40 < 2.22e-16 ***
+#>                  Df test stat approx F num Df den Df     Pr(>F)    
+#> Pillai            2    1.2041   15.127      8     80 2.7891e-13 ***
+#> Wilks             2    0.0013  260.659      8     78 < 2.22e-16 ***
+#> Hotelling-Lawley  2  610.2339 2898.611      8     76 < 2.22e-16 ***
+#> Roy               2  609.9749 6099.749      4     40 < 2.22e-16 ***
 #> ---
 #> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 heplot(root.mod, hypotheses=list(Contrasts=hyp, C1=hyp[1,], C2=hyp[2,]))
