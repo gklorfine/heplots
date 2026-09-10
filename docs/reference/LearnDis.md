@@ -21,7 +21,8 @@ per cell.
 
 - `Disability`:
 
-  Degree of disability, a factor with levels `Mild` `Moderate` `Severe`
+  Degree of disability, an ordered factor with levels `Mild` \<
+  `Moderate` \< `Severe`
 
 - `Treatment`:
 
@@ -62,7 +63,7 @@ Annals of Mathematical Statistics*, 29(4), 1177-1187.
 data(LearnDis)
 str(LearnDis)
 #> 'data.frame':    18 obs. of  5 variables:
-#>  $ Disability: Factor w/ 3 levels "Mild","Moderate",..: 1 1 1 2 2 2 3 3 3 1 ...
+#>  $ Disability: Ord.factor w/ 3 levels "Mild"<"Moderate"<..: 1 1 1 2 2 2 3 3 3 1 ...
 #>  $ Treatment : Factor w/ 2 levels "Treatment","Control": 1 1 1 1 1 1 1 1 1 2 ...
 #>  $ WRAT_R    : num  115 98 107 100 105 95 89 100 90 90 ...
 #>  $ WRAT_A    : num  108 105 98 105 95 98 78 85 95 92 ...

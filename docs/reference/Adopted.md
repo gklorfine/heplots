@@ -64,7 +64,6 @@ Hundred Adopted Children, *Journal of Genetic Psychology* **75**:
 ## Examples
 
 ``` r
-
 # Treat as multivariate regression problem
 Adopted.mod <- lm(cbind(Age2IQ, Age4IQ, Age8IQ, Age13IQ) ~ AMED + BMIQ, 
                   data=Adopted)
@@ -84,9 +83,7 @@ Adopted.mod
 
 require(car)
 #> Loading required package: car
-#> Warning: package 'car' was built under R version 4.5.3
 #> Loading required package: carData
-#> Warning: package 'carData' was built under R version 4.5.3
 #> 
 #> Attaching package: 'car'
 #> The following object is masked from 'package:dplyr':

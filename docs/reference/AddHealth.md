@@ -42,7 +42,6 @@ Likert scale, with categories
 ## Examples
 
 ``` r
-
 data(AddHealth)
 
 if(require(dplyr) & require(ggplot2)) {
@@ -73,7 +72,6 @@ color = grade)) +
   theme_bw(base_size = 15)
 }
 #> Loading required package: dplyr
-#> Warning: package 'dplyr' was built under R version 4.5.3
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -83,7 +81,6 @@ color = grade)) +
 #> 
 #>     intersect, setdiff, setequal, union
 #> Loading required package: ggplot2
-#> Warning: package 'ggplot2' was built under R version 4.5.3
 #> # A tibble: 6 × 6
 #>   grade depression anxiety     n dep_se anx_se
 #>   <ord>      <dbl>   <dbl> <int>  <dbl>  <dbl>

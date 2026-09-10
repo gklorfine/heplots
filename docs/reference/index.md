@@ -191,6 +191,8 @@ Utility functions
   : Weight Gain in Rats Exposed to Thiouracil and Thyroxin
 - [`ReactTime`](https://friendly.github.io/heplots/reference/ReactTime.md)
   : Reaction Time Data
+- [`ReadingDisability`](https://friendly.github.io/heplots/reference/ReadingDisability.md)
+  : Cognitive and Achievement Test Scores by Reading Level
 - [`Rohwer`](https://friendly.github.io/heplots/reference/Rohwer.md) :
   Rohwer Data Set
 - [`RootStock`](https://friendly.github.io/heplots/reference/RootStock.md)

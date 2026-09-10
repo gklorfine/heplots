@@ -56,7 +56,6 @@ of squares.
 data(dogfood)
 library(car)
 library(candisc)
-#> Warning: package 'candisc' was built under R version 4.5.3
 #> 
 #> Attaching package: 'candisc'
 #> The following object is masked from 'package:stats':

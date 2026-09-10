@@ -65,8 +65,8 @@ derived from a real study.</p>
     <p>A data frame with 18 observations on the following 5 variables, a
 3 (<code>Disability</code>) x 2 (<code>Treatment</code>) between-subjects factorial with
 n = 3 per cell.</p><dl><dt><code>Disability</code></dt>
-<dd><p>Degree of disability, a factor with levels
-<code>Mild</code> <code>Moderate</code> <code>Severe</code></p></dd>
+<dd><p>Degree of disability, an ordered factor with
+levels <code>Mild</code> &lt; <code>Moderate</code> &lt; <code>Severe</code></p></dd>
 
 <dt><code>Treatment</code></dt>
 <dd><p>a factor with levels <code>Treatment</code> <code>Control</code></p></dd>
@@ -106,7 +106,7 @@ pp.273-274.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">LearnDis</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">LearnDis</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	18 obs. of  5 variables:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ Disability: Factor w/ 3 levels "Mild","Moderate",..: 1 1 1 2 2 2 3 3 3 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ Disability: Ord.factor w/ 3 levels "Mild"&lt;"Moderate"&lt;..: 1 1 1 2 2 2 3 3 3 1 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ Treatment : Factor w/ 2 levels "Treatment","Control": 1 1 1 1 1 1 1 1 1 2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ WRAT_R    : num  115 98 107 100 105 95 89 100 90 90 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ WRAT_A    : num  108 105 98 105 95 98 78 85 95 92 ...</span>
